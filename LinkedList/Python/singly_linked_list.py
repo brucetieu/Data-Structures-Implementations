@@ -69,6 +69,30 @@ class linked_list:
                 return
             curr_idx += 1
 
+    # Use three pointers! curr - track current node, prev - track previous node, next - track next node
+    def reverse(self):
+        curr = self.head
+        prev = None
+        next = None
+
+        while curr != None:
+            next = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next
+
+        return prev
+    
+    def print_reverse(self, node):
+        curr = node
+
+        while (curr != None):
+            print(curr.data)
+            curr = curr.next
+
+            
+
+
 my_list = linked_list()
 
 my_list.append(1)
@@ -76,8 +100,9 @@ my_list.append(2)
 my_list.append(3)
 my_list.append(4)
 my_list.append(5)
-
 my_list.erase(2)
 
-
 print(my_list.display())
+
+reverse = my_list.reverse()
+my_list.print_reverse(reverse)
