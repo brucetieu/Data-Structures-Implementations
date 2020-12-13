@@ -100,54 +100,28 @@ class bst:
         prev = None
         curr = root
 
+        tempNode = None
+
         # # If BST is empty, return None.
         # if curr == None:
         #     return None
 
         while curr != None:
             # if curr != None:
-            #     prev = curr
             if curr.value == value:
                 break
             if value < curr.value:
-                # prev = curr
+                prev = curr
                 curr = curr.left
             elif value >= curr.value:
-                # prev = curr
+                prev = curr
                 curr = curr.right
 
         # If node not found, return nothing.
         if curr == None:
             print(value, "is not found.")
             return None
-        
 
-        # Traverse BST until desired node is located.
-        # if value < curr.value:
-        #     while curr.left != None:
-        #         prev = curr
-        #         curr = curr.left
-
-        #         if value == curr.value:
-        #             break
-            
-            # if value != curr.value:
-            #     print(value, "not found")
-            #     return
-
-        # elif value >= curr.value:
-        #     while curr.right != None:
-        #         prev = curr
-        #         curr = curr.right
-                
-        #         if value == curr.value:
-        #             break
-
-            # if value != curr.value:
-            #     print(value, "not found")
-            #     return
-        
-    
 
         # Leaf node
         if curr.left == None and curr.right == None:
@@ -159,29 +133,47 @@ class bst:
 
         # Delete one child with a right subtree.
         elif curr.left == None:
-            prev.right = curr.right
+            # tempNode = curr.right
+
+            if prev.left == curr:
+                prev.left = curr.right 
+            elif prev.right == curr:
+                prev.right = curr.right 
+            # curr = None
+            # prev.right = curr.right
         
         # Delete one child with a left subtree.
         elif curr.right == None:
-            prev.left = curr.left
+            # tempNode = curr.left
 
-        # Two children
-        else:
-            temp_prev = curr
-            val = temp_prev.value
-            temp = curr.right
+            if prev.left == curr:
+                prev.left = curr.left 
+            elif prev.right == curr:
+                prev.right = curr.left 
+            # curr = None
 
-            while temp.left != None:
-                temp_prev = temp
-                temp = temp.left
+        # if curr == prev.left: 
+        #     prev.left = tempNode 
+        # else: 
+        #     prev.right = tempNode 
+
+        # # Two children
+        # else:
+        #     temp_prev = curr
+        #     val = temp_prev.value
+        #     temp = curr.right
+
+        #     while temp.left != None:
+        #         temp_prev = temp
+        #         temp = temp.left
             
-            curr.value = temp.value
+        #     curr.value = temp.value
 
-            print(val, temp.value)
-            if val >= temp.value:
-                temp_prev.left = None
-            else:
-                temp_prev.right = None
+        #     print(val, temp.value)
+        #     if val >= temp.value:
+        #         temp_prev.left = None
+        #     else:
+        #         temp_prev.right = None
 
 
 
@@ -207,17 +199,9 @@ bst.insert(4)
 bst.insert(9)
 bst.insert(21)
 bst.insert(19)
-bst.insert(25)
+# bst.insert(25)
 
-bst.delete_node(26)
-# bst.delete_node(15)
-# bst.delete_node(21)
-# bst.delete_node(1)
-# bst.delete_node(2)
-# bst.delete_node(7)
-# bst.delete_node(6)
-# bst.delete_node(9)
-# bst.delete_node(1)
+bst.delete_node(21)
 
 bst.inorder_traversal()
 
