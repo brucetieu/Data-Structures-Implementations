@@ -12,27 +12,46 @@ class node:
 Recursive BST Approach for Insertion, deletion
 '''
 class bst:
+
+    '''
+    Initialize root and size variables.
+    '''
     def __init__(self):
         self.root = None
         self.size = 0
 
+    '''
+    Get the size of the BST.
+    '''
     def get_size(self):
         return self.size
 
-    # Helper method for insertions
+    '''
+    Helper method for inserting a node into a BST.
+    '''
     def _insert(self, curr_node, value):
+
+        # Insert node to the left subtree if the value is less than the current nodes.
         if value < curr_node.value:
+
+            # Create a new node if we need to insert a leaf node.
             if curr_node.left == None:
                 curr_node.left = node(value)
             else:
                 self._insert(curr_node.left, value)
+
+        # Insert node to the right subtree if the value is less than the current nodes.       
         elif value >= curr_node.value:
+
+            # Create a new node if we need to insert a leaf node.
             if curr_node.right == None:
                 curr_node.right = node(value)
             else:
                 self._insert(curr_node.right, value)
 
-    # Main method for insertions
+    '''
+    Main method for inserting a value into a node.
+    '''
     def insert(self, value):
         # If root is null, create a new node.
         if self.root == None:
@@ -40,6 +59,8 @@ class bst:
         # Otherwise, insert the node
         else:
             self._insert(self.root, value)
+        
+        # Increment size of BST by 1.
         self.size += 1
 
 
@@ -73,8 +94,9 @@ class bst:
     def postorder_traversal(self):
         self._postorder_traversal(self.root)
 
-    
-    # Find minimum value in a tree.
+    '''
+    Find minimum value in a tree.
+    '''
     def find_min(self, root):
         curr = root
         if curr == None:
@@ -85,7 +107,9 @@ class bst:
             return curr
 
 
-    # Find maximum value in a tree.
+    '''
+    Find maximum value in a tree.
+    '''
     def find_max(self, root):
         curr = root
         if curr == None:
@@ -95,21 +119,24 @@ class bst:
                 curr = curr.right
             return curr
 
-    # Delete a node in the BST.
-    def _delete_node(self, root, value):
+    '''
+    Helper method for deleting a node in a BST - Iterative approach.
+    '''
+    def _delete_node_iterative(self, root, value):
+        
+        # Keep track of the previous node to update pointers accordingly.
         prev = None
+
+        # Keep track of the current node.
         curr = root
 
-        tempNode = None
-
-        # # If BST is empty, return None.
-        # if curr == None:
-        #     return None
-
+        # Traverse through the BST until we locate the node to be deleted.
         while curr != None:
-            # if curr != None:
+           
+            # The node has been located for deletion.
             if curr.value == value:
                 break
+
             if value < curr.value:
                 prev = curr
                 curr = curr.left
@@ -122,75 +149,77 @@ class bst:
             print(value, "is not found.")
             return None
 
-
-        # Leaf node
+        # Delete a leaf node.
         if curr.left == None and curr.right == None:
+
+            # If the node to be deleted is root, and it has no children, delete it.
+            if prev == None:
+                self.root = None
+                return self.root
+
             # If previous's left is pointing to the current node, delete that link.
             if prev.left == curr:
                 prev.left = None
             else:
                 prev.right = None
 
-        # Delete one child with a right subtree.
+        # Delete a child node with a right subtree.
         elif curr.left == None:
-            # tempNode = curr.right
 
-            if prev.left == curr:
+            # If the node to be deleted is a root, and it has one child, just set the next node to be the root.
+            if prev == None:
+                self.root = self.root.right
+
+            elif prev.left == curr:
                 prev.left = curr.right 
             elif prev.right == curr:
                 prev.right = curr.right 
-            # curr = None
-            # prev.right = curr.right
         
-        # Delete one child with a left subtree.
+        # Delete a child node with a left subtree.
         elif curr.right == None:
-            # tempNode = curr.left
+            
+            # If the node to be deleted is a root, and it has one child, just set the next node to be the root.
+            if prev == None:
+                self.root = self.root.left
 
-            if prev.left == curr:
+            # Set the previous pointer to point to the node after the one that is deleted.
+            elif prev.left == curr:
                 prev.left = curr.left 
+            
             elif prev.right == curr:
                 prev.right = curr.left 
-            # curr = None
 
-        # if curr == prev.left: 
-        #     prev.left = tempNode 
-        # else: 
-        #     prev.right = tempNode 
+        # Delete a node which contains two children.
+        else:
 
-        # # Two children
-        # else:
-        #     temp_prev = curr
-        #     val = temp_prev.value
-        #     temp = curr.right
+            # Keep track of the node before the node containing the minimum.
+            temp_prev = curr
 
-        #     while temp.left != None:
-        #         temp_prev = temp
-        #         temp = temp.left
-            
-        #     curr.value = temp.value
+            # Use this temp node to traverse the right subtree.
+            temp = curr.right
 
-        #     print(val, temp.value)
-        #     if val >= temp.value:
-        #         temp_prev.left = None
-        #     else:
-        #         temp_prev.right = None
+            # Traverse the right subtree until we've found the node with the minimum value.
+            while temp.left != None:
+                temp_prev = temp
+                temp = temp.left
 
+            # We've located the minimum value in the right subtree. So replace the curr node's value with this minium value.
+            curr.value = temp.value
 
+            # Then, delete the node containing the mininum value.
+            if temp_prev.left == temp:
+                temp_prev.left = None
 
+            elif temp_prev.right == temp:
+                temp_prev.right = None
 
-            
-            
-
-    def delete_node(self, value):
-        self._delete_node(self.root, value)
+    '''
+    Delete a node in the BST containing a certain value using the iterative approach.
+    '''
+    def delete_node_iterative(self, value):
+        self._delete_node_iterative(self.root, value)
 
 bst = bst()
-# bst.insert(4)
-# bst.insert(2)
-# bst.insert(7)
-# bst.insert(1)
-# bst.insert(9)
-# bst.insert(6)
 bst.insert(5)
 bst.insert(2)
 bst.insert(15)
@@ -199,9 +228,9 @@ bst.insert(4)
 bst.insert(9)
 bst.insert(21)
 bst.insert(19)
-# bst.insert(25)
+bst.insert(25)
 
-bst.delete_node(21)
+bst.delete_node_iterative(5)
 
 bst.inorder_traversal()
 
