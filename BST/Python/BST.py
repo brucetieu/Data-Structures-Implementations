@@ -216,8 +216,37 @@ class bst:
     '''
     Delete a node in the BST containing a certain value using the iterative approach.
     '''
-    def delete_node_iterative(self, value):
+    def delete_node_iterative(self, root, value):
         self._delete_node_iterative(self.root, value)
+
+    '''
+    Helper method for finding a node in BST.
+    '''
+    def _find_node(self, root, value):
+        curr = root
+
+        if curr == None:
+            return None
+
+        if value < curr.value:
+            self._find_node(curr.left, value)
+        elif value > curr.value:
+            self._find_node(curr.right, value)
+
+        if value == curr.value:
+            print(value, "Found")
+            return True
+        
+        return False
+
+    '''
+    Find the node in the BST.
+    '''
+    def find_node(self, value):
+        self._find_node(self.root, value)
+
+
+    
 
 bst = bst()
 bst.insert(5)
@@ -230,7 +259,7 @@ bst.insert(21)
 bst.insert(19)
 bst.insert(25)
 
-bst.delete_node_iterative(5)
+bst.find_node(11)
 
 bst.inorder_traversal()
 
