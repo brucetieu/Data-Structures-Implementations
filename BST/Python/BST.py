@@ -97,27 +97,36 @@ class bst:
     '''
     Find minimum value in a tree.
     '''
-    def find_min(self, root):
+    def _find_min(self, root):
         curr = root
         if curr == None:
-            return curr
+            return None
         else:
             while (curr.left != None):
                 curr = curr.left
-            return curr
-
+            return curr.value
 
     '''
     Find maximum value in a tree.
     '''
-    def find_max(self, root):
+    def _find_max(self, root):
         curr = root
+
         if curr == None:
-            return curr
+            return None
         else:
             while (curr.right != None):
                 curr = curr.right
-            return curr
+
+            return curr.value
+
+    def find_min(self):
+        min = self._find_min(self.root)
+        return min
+
+    def find_max(self):
+        max = self._find_max(self.root)
+        return max
 
     '''
     Helper method for deleting a node in a BST - Iterative approach.
@@ -216,7 +225,7 @@ class bst:
     '''
     Delete a node in the BST containing a certain value using the iterative approach.
     '''
-    def delete_node_iterative(self, root, value):
+    def delete_node_iterative(self, value):
         self._delete_node_iterative(self.root, value)
 
     '''
@@ -259,9 +268,20 @@ bst.insert(21)
 bst.insert(19)
 bst.insert(25)
 
+bst.delete_node_iterative(25)
+
 bst.find_node(11)
 
 bst.inorder_traversal()
+print()
+bst.postorder_traversal()
+print()
+bst.preorder_traversal()
+
+print("max", bst.find_max())
+print("min", bst.find_min())
+
+
 
 
 
