@@ -1,4 +1,8 @@
 '''
+A double-ended queue or deque (pronounced “deck”) is a generalization of a stack and a queue that supports adding and removing items from either the front or the back of the data structure.
+'''
+
+'''
 Create Node class for building the Queue. We use doubly linked list.
 '''
 class Node:
