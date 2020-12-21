@@ -20,7 +20,7 @@ class Dequeue:
     Is the dequeue empty?
     '''
     def isEmpty(self):
-        return self.head.next == None
+        return self.head == None
 
     '''
     Return the number of items in the dequeue
