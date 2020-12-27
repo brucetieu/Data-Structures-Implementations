@@ -55,14 +55,20 @@ class ResizableArray:
         self._array = new_array
         self._capacity = new_size
 
+# Test the ResizableArray class.
 resizable_array = ResizableArray()
 
 resizable_array.add("hello")
 resizable_array.add("there")
 resizable_array.add("dynamic")
+resizable_array.add("test")
+resizable_array.add("this will cause array size to double")
 
 
 print(resizable_array.get_item(0))
+print(resizable_array.get_item(1))
+print(resizable_array.get_item(2))
+print(resizable_array.get_item(3))
 
 
 print(resizable_array.size())
