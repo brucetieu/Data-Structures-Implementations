@@ -24,23 +24,6 @@ class MinBinaryHeap:
                 self._min_binary_heap[index], self._min_binary_heap[min_child] = self._min_binary_heap[min_child], self._min_binary_heap[index]
 
             index = min_child
-            # parent_idx = index
-            # left_child = (2 * index) + 1
-            # right_child = (2 * index) + 2
-
-            # if left_child < len(self._min_binary_heap):
-
-            #     if self._min_binary_heap[parent_idx] > self._min_binary_heap[left_child]:
-            #         self._min_binary_heap[parent_idx], self._min_binary_heap[left_child] = self._min_binary_heap[left_child], self._min_binary_heap[parent_idx]
-            #         index = left_child
-                
-            # elif right_child < len(self._min_binary_heap):
-            #     if self._min_binary_heap[parent_idx] > self._min_binary_heap[right_child]:
-            #         self._min_binary_heap[parent_idx], self._min_binary_heap[right_child] = self._min_binary_heap[right_child], self._min_binary_heap[parent_idx]
-            #         index = right_child
-
-            
-            # index += 1
             
     def locate_min_child(self, index):
         left_child = (2 * index) + 1
@@ -121,19 +104,19 @@ my_min_heap.insert(-3)
 
 my_min_heap.print_heap()
 
-# my_min_heap2 = MinBinaryHeap()
+my_min_heap2 = MinBinaryHeap()
 
-# items = [17,15,8,9,10,13,6,4,5,3,1]
+items = [17,15,8,9,10,13,6,4,5,3,1]
 
-# for item in items:
-#     my_min_heap2.insert(item)
+for item in items:
+    my_min_heap2.insert(item)
 
-# print(my_min_heap2.remove_min())
-# print(my_min_heap2.remove_min())
+print(my_min_heap2.remove_min())
+print(my_min_heap2.remove_min())
 
 
 
-# my_min_heap2.print_heap()
+my_min_heap2.print_heap()
 
 
 
