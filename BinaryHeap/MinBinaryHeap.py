@@ -12,19 +12,23 @@ class MinBinaryHeap:
             if self._min_binary_heap[parent_idx] > self._min_binary_heap[child_idx]:
                 self._min_binary_heap[child_idx], self._min_binary_heap[parent_idx] = self._min_binary_heap[parent_idx], self._min_binary_heap[child_idx]
             
-            index = (index - 1) // 2
+            index = parent_idx
 
 
     def trickle_down(self, index):
         
         while (2 * index) + 2 < len(self._min_binary_heap) or (2 * index) + 1 < len(self._min_binary_heap):
-    
-            if self._min_binary_heap[index] > self._min_binary_heap[(2 * index) + 1]:
-                self._min_binary_heap[index], self._min_binary_heap[(2 * index) + 1] = self._min_binary_heap[(2 * index) + 1], self._min_binary_heap[index]
-                index = (2 * index) + 1
-            elif self._min_binary_heap[index] > self._min_binary_heap[(2 * index) + 2]:
-                self._min_binary_heap[index], self._min_binary_heap[(2 * index) + 1] = self._min_binary_heap[(2 * index) + 1], self._min_binary_heap[index]
-                index = (2 * index) + 2
+            parent_idx = index
+            left_child = (2 * index) + 1
+            right_child = (2 * index) + 2
+
+            if self._min_binary_heap[parent_idx] > self._min_binary_heap[left_child]:
+                self._min_binary_heap[parent_idx], self._min_binary_heap[left_child] = self._min_binary_heap[left_child], self._min_binary_heap[parent_idx]
+                index = left_child
+                
+            elif self._min_binary_heap[parent_idx] > self._min_binary_heap[right_child]:
+                self._min_binary_heap[parent_idx], self._min_binary_heap[right_child] = self._min_binary_heap[right_child], self._min_binary_heap[parent_idx]
+                index = right_child
 
 
     def insert(self, val):
