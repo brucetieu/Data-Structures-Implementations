@@ -75,7 +75,28 @@ class MinBinaryHeap:
 
 my_min_heap = MinBinaryHeap()
 
+my_min_heap.insert(10)
+my_min_heap.insert(4)
+my_min_heap.insert(15)
+my_min_heap.remove_min()
+my_min_heap.insert(20)
+my_min_heap.insert(0)
+my_min_heap.insert(30)
+my_min_heap.remove_min()
+my_min_heap.remove_min()
+my_min_heap.insert(2)
+my_min_heap.insert(4)
+my_min_heap.insert(-1)
+my_min_heap.insert(-3)
 
+
+#     -3 
+#     / \
+#    4  -1
+#   / \  / \
+#  30 15 20 2
+
+my_min_heap.print_heap()
 
 
 
