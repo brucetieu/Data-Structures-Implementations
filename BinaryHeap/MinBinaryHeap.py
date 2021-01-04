@@ -4,12 +4,12 @@ class MinBinaryHeap:
         self._size = 0
 
     def bubble_up(self, index):
-        while (index >= 0 and self._min_binary_heap[(index - 1) // 2] > self._min_binary_heap[index]):
-            self._min_binary_heap[index], self._min_binary_heap[(index - 1) // 2] = self._min_binary_heap[(index - 1) // 2], self._min_binary_heap[index]
-        
+        while (index - 1) // 2 >= 0:
+            if self._min_binary_heap[(index - 1) // 2] > self._min_binary_heap[index]:
+                self._min_binary_heap[index], self._min_binary_heap[(index - 1) // 2] = self._min_binary_heap[(index - 1) // 2], self._min_binary_heap[index]
+            index = (index - 1) // 2
 
 
-        
     
     def trickle_down(self):
         pass
