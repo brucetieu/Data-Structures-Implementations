@@ -17,25 +17,48 @@ class MinBinaryHeap:
 
     def trickle_down(self, index):
 
-        while index < len(self._min_binary_heap):
-            parent_idx = index
-            left_child = (2 * index) + 1
-            right_child = (2 * index) + 2
+        while (2 * index) + 1 < len(self._min_binary_heap):
+            min_child = self.locate_min_child(index)
 
-            if (2 * index) + 1 < len(self._min_binary_heap):
+            if self._min_binary_heap[index] > self._min_binary_heap[min_child]:
+                self._min_binary_heap[index], self._min_binary_heap[min_child] = self._min_binary_heap[min_child], self._min_binary_heap[index]
 
-                if self._min_binary_heap[index] > self._min_binary_heap[(2 * index) + 1]:
-                    self._min_binary_heap[index], self._min_binary_heap[(2 * index) + 1] = self._min_binary_heap[(2 * index) + 1], self._min_binary_heap[index]
-                    index = (2 * index) + 1
+            index = min_child
+            # parent_idx = index
+            # left_child = (2 * index) + 1
+            # right_child = (2 * index) + 2
+
+            # if left_child < len(self._min_binary_heap):
+
+            #     if self._min_binary_heap[parent_idx] > self._min_binary_heap[left_child]:
+            #         self._min_binary_heap[parent_idx], self._min_binary_heap[left_child] = self._min_binary_heap[left_child], self._min_binary_heap[parent_idx]
+            #         index = left_child
                 
-            elif (2 * index) + 2 < len(self._min_binary_heap):
-                if self._min_binary_heap[index] > self._min_binary_heap[(2 * index) + 2]:
-                    self._min_binary_heap[index], self._min_binary_heap[(2 * index) + 2] = self._min_binary_heap[(2 * index) + 2], self._min_binary_heap[index]
-                    index = (2 * index) + 2
+            # elif right_child < len(self._min_binary_heap):
+            #     if self._min_binary_heap[parent_idx] > self._min_binary_heap[right_child]:
+            #         self._min_binary_heap[parent_idx], self._min_binary_heap[right_child] = self._min_binary_heap[right_child], self._min_binary_heap[parent_idx]
+            #         index = right_child
 
             
-            index += 1
+            # index += 1
             
+    def locate_min_child(self, index):
+        left_child = (2 * index) + 1
+        right_child = (2 * index) + 2
+
+        if left_child < len(self._min_binary_heap) - 1 and right_child < len(self._min_binary_heap):
+            if self._min_binary_heap[left_child] < self._min_binary_heap[right_child]:
+                return left_child
+            else: 
+                return right_child
+
+        elif right_child >= len(self._min_binary_heap):
+            return left_child
+
+
+
+
+
 
 
 
@@ -52,7 +75,8 @@ class MinBinaryHeap:
     def find_min(self):
         if len(self._min_binary_heap) == 0:
             print("Binary heap is empty, no minimum element exists.")
-        return self._min_binary_heap[0]
+        else: 
+            print(self._min_binary_heap[0])
 
     def remove_min(self):
         if len(self._min_binary_heap) == 0:
@@ -74,32 +98,19 @@ class MinBinaryHeap:
 
 my_min_heap = MinBinaryHeap()
 
-# my_min_heap.insert(10)
-# my_min_heap.insert(4)
-# my_min_heap.insert(15)
-# my_min_heap.remove_min()
-# my_min_heap.insert(20)
-# my_min_heap.insert(0)
-# my_min_heap.insert(30)
-# my_min_heap.remove_min()
-# my_min_heap.remove_min()
-# my_min_heap.insert(2)
-# my_min_heap.insert(4)
-# my_min_heap.insert(-1)
-# my_min_heap.insert(-3)
-
-# my_min_heap.insert(9)
-# my_min_heap.insert(5)
-# my_min_heap.insert(6)
-# my_min_heap.insert(2)
-# my_min_heap.insert(3)
-
-# print(my_min_heap.remove_min())
-# print(my_min_heap.remove_min())
-# print(my_min_heap.remove_min())
-# print(my_min_heap.remove_min())
-# print(my_min_heap.remove_min())
-
+my_min_heap.insert(10)
+my_min_heap.insert(4)
+my_min_heap.insert(15)
+my_min_heap.remove_min()
+my_min_heap.insert(20)
+my_min_heap.insert(0)
+my_min_heap.insert(30)
+my_min_heap.remove_min()
+my_min_heap.remove_min()
+my_min_heap.insert(2)
+my_min_heap.insert(4)
+my_min_heap.insert(-1)
+my_min_heap.insert(-3)
 
 
 #     -3 
@@ -109,6 +120,23 @@ my_min_heap = MinBinaryHeap()
 #  30 15 20 2
 
 my_min_heap.print_heap()
+
+# my_min_heap2 = MinBinaryHeap()
+
+# items = [17,15,8,9,10,13,6,4,5,3,1]
+
+# for item in items:
+#     my_min_heap2.insert(item)
+
+# print(my_min_heap2.remove_min())
+# print(my_min_heap2.remove_min())
+
+
+
+# my_min_heap2.print_heap()
+
+
+
 
 
 
