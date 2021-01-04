@@ -4,31 +4,39 @@ class MinBinaryHeap:
         self._size = 0
 
     def bubble_up(self, index):
-        
+
         while (index - 1) // 2 >= 0:
             child_idx = index
             parent_idx = (index - 1) // 2
 
             if self._min_binary_heap[parent_idx] > self._min_binary_heap[child_idx]:
-                self._min_binary_heap[child_idx], self._min_binary_heap[parent_idx] = self._min_binary_heap[parent_idx], self._min_binary_heap[child_idx]
-            
+                self._min_binary_heap[child_idx], self._min_binary_heap[
+                    parent_idx] = self._min_binary_heap[parent_idx], self._min_binary_heap[child_idx]
+
             index = parent_idx
 
-
     def trickle_down(self, index):
-        
-        while (2 * index) + 2 < len(self._min_binary_heap) or (2 * index) + 1 < len(self._min_binary_heap):
+
+        while index < len(self._min_binary_heap):
             parent_idx = index
             left_child = (2 * index) + 1
             right_child = (2 * index) + 2
 
-            if self._min_binary_heap[parent_idx] > self._min_binary_heap[left_child]:
-                self._min_binary_heap[parent_idx], self._min_binary_heap[left_child] = self._min_binary_heap[left_child], self._min_binary_heap[parent_idx]
-                index = left_child
+            if (2 * index) + 1 < len(self._min_binary_heap):
+
+                if self._min_binary_heap[index] > self._min_binary_heap[(2 * index) + 1]:
+                    self._min_binary_heap[index], self._min_binary_heap[(2 * index) + 1] = self._min_binary_heap[(2 * index) + 1], self._min_binary_heap[index]
+                    index = (2 * index) + 1
                 
-            elif self._min_binary_heap[parent_idx] > self._min_binary_heap[right_child]:
-                self._min_binary_heap[parent_idx], self._min_binary_heap[right_child] = self._min_binary_heap[right_child], self._min_binary_heap[parent_idx]
-                index = right_child
+            elif (2 * index) + 2 < len(self._min_binary_heap):
+                if self._min_binary_heap[index] > self._min_binary_heap[(2 * index) + 2]:
+                    self._min_binary_heap[index], self._min_binary_heap[(2 * index) + 2] = self._min_binary_heap[(2 * index) + 2], self._min_binary_heap[index]
+                    index = (2 * index) + 2
+
+            
+            index += 1
+            
+
 
 
     def insert(self, val):
@@ -51,9 +59,11 @@ class MinBinaryHeap:
             print("Binary heap is empty, nothing to remove.")
 
         else:
+            temp = self._min_binary_heap[0]
             self._min_binary_heap[0] = self._min_binary_heap[len(self._min_binary_heap) - 1]
             self._min_binary_heap.pop()
             self.trickle_down(0)
+            return temp
 
     def build_heap(self):
         pass
@@ -64,19 +74,32 @@ class MinBinaryHeap:
 
 my_min_heap = MinBinaryHeap()
 
-my_min_heap.insert(10)
-my_min_heap.insert(4)
-my_min_heap.insert(15)
-my_min_heap.remove_min()
-my_min_heap.insert(20)
-my_min_heap.insert(0)
-my_min_heap.insert(30)
-my_min_heap.remove_min()
-my_min_heap.remove_min()
-my_min_heap.insert(2)
-my_min_heap.insert(4)
-my_min_heap.insert(-1)
-my_min_heap.insert(-3)
+# my_min_heap.insert(10)
+# my_min_heap.insert(4)
+# my_min_heap.insert(15)
+# my_min_heap.remove_min()
+# my_min_heap.insert(20)
+# my_min_heap.insert(0)
+# my_min_heap.insert(30)
+# my_min_heap.remove_min()
+# my_min_heap.remove_min()
+# my_min_heap.insert(2)
+# my_min_heap.insert(4)
+# my_min_heap.insert(-1)
+# my_min_heap.insert(-3)
+
+# my_min_heap.insert(9)
+# my_min_heap.insert(5)
+# my_min_heap.insert(6)
+# my_min_heap.insert(2)
+# my_min_heap.insert(3)
+
+# print(my_min_heap.remove_min())
+# print(my_min_heap.remove_min())
+# print(my_min_heap.remove_min())
+# print(my_min_heap.remove_min())
+# print(my_min_heap.remove_min())
+
 
 
 #     -3 
