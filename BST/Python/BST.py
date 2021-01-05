@@ -1,102 +1,97 @@
 
-'''
-Define node class
-'''
-class node:
+class Node:
+    '''Node class'''
+
     def __init__(self, value=None):
         self.value = value
         self.left = None
         self.right = None
 
-'''
-Recursive BST Approach for Insertion, deletion
-'''
-class bst:
 
-    '''
-    Initialize root and size variables.
-    '''
+class BST:
+
+    '''Initialize root and size variables. Binary Search Tree class'''
     def __init__(self):
         self.root = None
         self.size = 0
 
-    '''
-    Get the size of the BST.
-    '''
+
+    '''Get the number of nodes in the BST.'''
     def get_size(self):
         return self.size
 
-    '''
-    Helper method for inserting a node into a BST.
-    '''
+
     def _insert(self, curr_node, value):
+        '''Helper method for inserting node into a BST.'''
 
         # Insert node to the left subtree if the value is less than the current nodes.
         if value < curr_node.value:
 
             # Create a new node if we need to insert a leaf node.
             if curr_node.left == None:
-                curr_node.left = node(value)
+                curr_node.left = Node(value)
             else:
                 self._insert(curr_node.left, value)
 
-        # Insert node to the right subtree if the value is less than the current nodes.       
+        # Insert node to the right subtree if the value is less than the current nodes.
         elif value >= curr_node.value:
 
             # Create a new node if we need to insert a leaf node.
             if curr_node.right == None:
-                curr_node.right = node(value)
+                curr_node.right = Node(value)
             else:
                 self._insert(curr_node.right, value)
 
-    '''
-    Main method for inserting a value into a node.
-    '''
+
     def insert(self, value):
+        '''Public method for inserting node into the BST'''
+
         # If root is null, create a new node.
         if self.root == None:
-            self.root = node(value)
+            self.root = Node(value)
         # Otherwise, insert the node
         else:
             self._insert(self.root, value)
-        
+
         # Increment size of BST by 1.
         self.size += 1
 
 
     def _inorder_traversal(self, root):
+        ''' Inorder traversal: left -> visit -> right'''
         if root != None:
             self._inorder_traversal(root.left)
             print(root.value)
             self._inorder_traversal(root.right)
 
-    # Inorder traversal: left -> visit -> right
+
     def inorder_traversal(self):
         self._inorder_traversal(self.root)
 
+
     def _preorder_traversal(self, root):
+        '''Preorder traversal: visit -> left -> right'''
         if root != None:
             print(root.value)
             self._preorder_traversal(root.left)
             self._preorder_traversal(root.right)
 
-    # Preorder traversal: visit -> left -> right
+
     def preorder_traversal(self):
         self._preorder_traversal(self.root)
 
     def _postorder_traversal(self, root):
+        '''Post order traversal: left -> right -> visit'''
         if root != None:
             self._postorder_traversal(root.left)
             self._postorder_traversal(root.right)
             print(root.value)
 
-    # Post order traversal: left -> right -> visit
+
     def postorder_traversal(self):
         self._postorder_traversal(self.root)
 
-    '''
-    Find minimum value in a tree.
-    '''
+
     def _find_min(self, root):
         curr = root
         if curr == None:
@@ -106,12 +101,9 @@ class bst:
                 curr = curr.left
             return curr.value
 
-    '''
-    Find maximum value in a tree.
-    '''
+
     def _find_max(self, root):
         curr = root
-
         if curr == None:
             return None
         else:
@@ -120,9 +112,11 @@ class bst:
 
             return curr.value
 
+
     def find_min(self):
         min = self._find_min(self.root)
         return min
+
 
     def find_max(self):
         max = self._find_max(self.root)
@@ -131,8 +125,9 @@ class bst:
     '''
     Helper method for deleting a node in a BST - Iterative approach.
     '''
+
     def _delete_node_iterative(self, root, value):
-        
+
         # Keep track of the previous node to update pointers accordingly.
         prev = None
 
@@ -141,7 +136,7 @@ class bst:
 
         # Traverse through the BST until we locate the node to be deleted.
         while curr != None:
-           
+
             # The node has been located for deletion.
             if curr.value == value:
                 break
@@ -180,23 +175,23 @@ class bst:
                 self.root = self.root.right
 
             elif prev.left == curr:
-                prev.left = curr.right 
+                prev.left = curr.right
             elif prev.right == curr:
-                prev.right = curr.right 
-        
+                prev.right = curr.right
+
         # Delete a child node with a left subtree.
         elif curr.right == None:
-            
+
             # If the node to be deleted is a root, and it has one child, just set the next node to be the root.
             if prev == None:
                 self.root = self.root.left
 
             # Set the previous pointer to point to the node after the one that is deleted.
             elif prev.left == curr:
-                prev.left = curr.left 
-            
+                prev.left = curr.left
+
             elif prev.right == curr:
-                prev.right = curr.left 
+                prev.right = curr.left
 
         # Delete a node which contains two children.
         else:
@@ -222,42 +217,78 @@ class bst:
             elif temp_prev.right == temp:
                 temp_prev.right = None
 
-    '''
-    Delete a node in the BST containing a certain value using the iterative approach.
-    '''
+
     def delete_node_iterative(self, value):
         self._delete_node_iterative(self.root, value)
 
-    '''
-    Helper method for finding a node in BST.
-    '''
+
     def _find_node(self, root, value):
-        curr = root
+        '''Find a node in the BST'''
 
-        if curr == None:
-            return None
+        if root == None:
+            return root
 
-        if value < curr.value:
-            self._find_node(curr.left, value)
-        elif value > curr.value:
-            self._find_node(curr.right, value)
+        if value < root.value:
+            self._find_node(root.left, value)
+        elif value > root.value:
+            self._find_node(root.right, value)
 
-        if value == curr.value:
-            print(value, "Found")
-            return True
-        
-        return False
+        else:
+            return 1
 
-    '''
-    Find the node in the BST.
-    '''
+        return -1
+
+
+
     def find_node(self, value):
-        self._find_node(self.root, value)
+        return self._find_node(self.root, value)
 
 
-    
+    def delete_node_recursive(self, value):
+        self._delete_node_recursive(self.root, value)
 
-bst = bst()
+
+    def _inorder_predecessor(self, root):
+        while root.right != None:
+            root = root.right
+        return root.val
+
+
+    def _inorder_successor(self, root):
+        while root.left != None:
+            root = root.left
+        return root.val
+
+
+    def _delete_node_recursive(self, root, value):
+        if root is None:
+            return root
+
+        if value > root.value:
+            root.right = self._delete_node_recursive(root.right, value)
+        elif value < root.value:
+            root.left = self._delete_node_recursive(root.left, value)
+
+        # The value is found.
+        else:
+
+            # Leaf node -> the base case.
+            if root.left is None and root.right is None:
+                root = None
+
+            # One or two children.
+            elif root.left:
+                root.value = self._inorder_predecessor(root.left)
+                root.left = self._delete_node_recursive(root.left, root.value)
+            else:
+                root.value = self._inorder_successor(root.right)
+                root.right = self._delete_node_recursive(root.right, root.value)
+
+        return root
+
+
+bst = BST()
+
 bst.insert(5)
 bst.insert(2)
 bst.insert(15)
@@ -268,9 +299,9 @@ bst.insert(21)
 bst.insert(19)
 bst.insert(25)
 
-bst.delete_node_iterative(25)
+bst.delete_node_recursive(25)
 
-bst.find_node(11)
+print(bst.find_node(6))
 
 bst.inorder_traversal()
 print()
@@ -280,9 +311,3 @@ bst.preorder_traversal()
 
 print("max", bst.find_max())
 print("min", bst.find_min())
-
-
-
-
-
-
