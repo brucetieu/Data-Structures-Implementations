@@ -284,6 +284,8 @@ class BST:
                 root.value = self._inorder_successor(root.right)
                 root.right = self._delete_node_recursive(root.right, root.value)
 
+            self.size -= 1
+
         return root
 
 
@@ -300,6 +302,7 @@ bst.insert(19)
 bst.insert(25)
 
 bst.delete_node_recursive(25)
+
 
 print(bst.find_node(6))
 
