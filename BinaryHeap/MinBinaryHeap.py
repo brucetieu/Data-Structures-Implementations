@@ -1,9 +1,7 @@
 class MinBinaryHeap:
-    def __init__(self):
-        self._min_binary_heap = []
-        self._size = 0
 
-    def bubble_up(self, index):
+    #------- Private methods ------- #
+    def _bubble_up(self, index):
         '''Bubble element up when a node is inserted.'''
 
         # Parent of any node in the heap is (p-1) / 2.
@@ -12,24 +10,22 @@ class MinBinaryHeap:
             parent_idx = (index - 1) // 2
 
             if self._min_binary_heap[parent_idx] > self._min_binary_heap[child_idx]:
-                self._min_binary_heap[child_idx], self._min_binary_heap[
-                    parent_idx] = self._min_binary_heap[parent_idx], self._min_binary_heap[child_idx]
+                self._swap(child_idx, parent_idx)
 
             index = parent_idx
 
-    def trickle_down(self, index):
+    def _trickle_down(self, index):
         '''Trickle down element when the minimum node is removed.'''
 
         while (2 * index) + 1 < len(self._min_binary_heap):
-            min_child = self.locate_min_child(index)
+            min_child = self._locate_min_child(index)
 
             if self._min_binary_heap[index] > self._min_binary_heap[min_child]:
-                self._min_binary_heap[index], self._min_binary_heap[
-                    min_child] = self._min_binary_heap[min_child], self._min_binary_heap[index]
+                self._swap(index, min_child)
 
             index = min_child
 
-    def locate_min_child(self, index):
+    def _locate_min_child(self, index):
         '''After deleting minimum node, need to locate the next smallest element to be swapped with bigger node.'''
 
         # Right child of parent at p is 2p + 1, left child of parent at p is 2p + 2 (index positions).
@@ -47,6 +43,14 @@ class MinBinaryHeap:
         elif right_child >= len(self._min_binary_heap):
             return left_child
 
+    def _swap(self, i, j):
+        self._min_binary_heap[i], self._min_binary_heap[j] = self._min_binary_heap[j], self._min_binary_heap[i]
+
+    # ------ Public methods ------ #
+    def __init__(self):
+        self._min_binary_heap = []
+        self._size = 0
+
     def insert(self, val):
         '''Insert a node into the minimum binary heap.'''
         if len(self._min_binary_heap) == 0:
@@ -56,7 +60,7 @@ class MinBinaryHeap:
             last_idx = len(self._min_binary_heap) - 1
 
             # 'Bubble' up element if heap order is violated.
-            self.bubble_up(last_idx)
+            self._bubble_up(last_idx)
         
         self._size += 1
 
@@ -78,11 +82,9 @@ class MinBinaryHeap:
                 self._min_binary_heap) - 1]
             self._min_binary_heap.pop()
             self._size -= 1
-            self.trickle_down(0)  # Trickle down node to preserve heap ordering.
+            self._trickle_down(0)  # Trickle down node to preserve heap ordering.
             return temp
 
-    def build_heap(self, array):
-        pass
 
     def is_empty(self):
         return self._size == 0
@@ -137,4 +139,4 @@ my_min_heap2.print_heap()
 #     / \   / \
 #    6  10 15 13
 #   / \
-#  17 10
+#  17 9
