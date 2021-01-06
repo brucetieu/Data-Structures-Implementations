@@ -288,6 +288,7 @@ class BST:
         return root
 
     def level_order_traversal(self):
+        '''Breadth first traversal of BST.'''
         self.queue.put(self.root)
 
         while not self.queue.empty():
