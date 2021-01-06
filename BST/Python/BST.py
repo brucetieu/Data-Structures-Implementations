@@ -1,14 +1,12 @@
 
-class Node:
-    '''Node class'''
-
-    def __init__(self, value=None):
-        self.value = value
-        self.left = None
-        self.right = None
-
 
 class BST:
+    class Node:
+        '''Node class for BST'''
+        def __init__(self, value=None):
+            self.value = value
+            self.left = None
+            self.right = None
 
     '''Initialize root and size variables. Binary Search Tree class'''
     def __init__(self):
@@ -29,7 +27,7 @@ class BST:
 
             # Create a new node if we need to insert a leaf node.
             if curr_node.left == None:
-                curr_node.left = Node(value)
+                curr_node.left = self.Node(value)
             else:
                 self._insert(curr_node.left, value)
 
@@ -38,7 +36,7 @@ class BST:
 
             # Create a new node if we need to insert a leaf node.
             if curr_node.right == None:
-                curr_node.right = Node(value)
+                curr_node.right = self.Node(value)
             else:
                 self._insert(curr_node.right, value)
 
@@ -48,7 +46,7 @@ class BST:
 
         # If root is null, create a new node.
         if self.root == None:
-            self.root = Node(value)
+            self.root = self.Node(value)
         # Otherwise, insert the node
         else:
             self._insert(self.root, value)
@@ -288,29 +286,35 @@ class BST:
 
         return root
 
-
-bst = BST()
-
-bst.insert(5)
-bst.insert(2)
-bst.insert(15)
-bst.insert(-4)
-bst.insert(4)
-bst.insert(9)
-bst.insert(21)
-bst.insert(19)
-bst.insert(25)
-
-bst.delete_node_recursive(25)
+    def level_order_traversal(self, root):
+        pass
 
 
-print(bst.find_node(6))
+if __name__ == '__main__':
+    bst = BST()
 
-bst.inorder_traversal()
-print()
-bst.postorder_traversal()
-print()
-bst.preorder_traversal()
+    bst.insert(5)
+    bst.insert(2)
+    bst.insert(15)
+    bst.insert(-4)
+    bst.insert(4)
+    bst.insert(9)
+    bst.insert(21)
+    bst.insert(19)
+    bst.insert(25)
 
-print("max", bst.find_max())
-print("min", bst.find_min())
+    bst.delete_node_recursive(25)
+    bst.delete_node_recursive(19)
+
+    print(bst.find_node(6))
+
+    bst.inorder_traversal()
+    print()
+    bst.postorder_traversal()
+    print()
+    bst.preorder_traversal()
+
+    print("max", bst.find_max())
+    print("min", bst.find_min())
+
+
