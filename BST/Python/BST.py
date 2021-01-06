@@ -1,4 +1,4 @@
-
+from queue import Queue
 
 class BST:
     class Node:
@@ -12,6 +12,7 @@ class BST:
     def __init__(self):
         self.root = None
         self.size = 0
+        self.queue = Queue(maxsize=100)
 
 
     '''Get the number of nodes in the BST.'''
@@ -286,8 +287,18 @@ class BST:
 
         return root
 
-    def level_order_traversal(self, root):
-        pass
+    def level_order_traversal(self):
+        self.queue.put(self.root)
+
+        while not self.queue.empty():
+            node = self.queue.get()
+            print(node.value)
+            
+            if node.left is not None:
+                self.queue.put(node.left)
+            if node.right is not None:
+                self.queue.put(node.right)
+
 
 
 if __name__ == '__main__':
@@ -316,5 +327,7 @@ if __name__ == '__main__':
 
     print("max", bst.find_max())
     print("min", bst.find_min())
+
+    bst.level_order_traversal()
 
 
