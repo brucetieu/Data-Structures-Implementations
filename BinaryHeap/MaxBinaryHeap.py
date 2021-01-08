@@ -26,7 +26,7 @@ class MaxBinaryHeap:
             index = max_child
 
     def _locate_max_child(self, index):
-        '''After deleting minimum node, need to locate the next smallest element to be swapped with bigger node.'''
+        '''After deleting maximum node, need to locate the next smallest element to be swapped with bigger node.'''
 
         # Right child of parent at p is 2p + 1, left child of parent at p is 2p + 2 (index positions).
         left_child = (2 * index) + 1
@@ -52,7 +52,7 @@ class MaxBinaryHeap:
         self._size = 0
 
     def insert(self, val):
-        '''Insert a node into the minimum binary heap.'''
+        '''Insert a node into the maximum binary heap.'''
         if len(self._max_binary_heap) == 0:
             self._max_binary_heap.append(val)
         else:
@@ -65,14 +65,14 @@ class MaxBinaryHeap:
         self._size += 1
 
     def find_max(self):
-        '''Get the minimum element in the heap.'''
+        '''Get the maximum element in the heap.'''
         if len(self._max_binary_heap) == 0:
-            print("Binary heap is empty, no minimum element exists.")
+            print("Binary heap is empty, no maximum element exists.")
         else:
             print(self._max_binary_heap[0])
 
     def remove_max(self):
-        '''Remove the minimum element in the heap.'''
+        '''Remove the maximum element in the heap.'''
         if len(self._max_binary_heap) == 0:
             print("Binary heap is empty, nothing to remove.")
 
