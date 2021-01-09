@@ -33,7 +33,7 @@ class MinBinaryHeap:
         right_child = (2 * index) + 2
 
         # Choose the smaller node of the light and right childs and get its index.
-        if left_child < len(self._min_binary_heap) - 1 and right_child < len(self._min_binary_heap):
+        if left_child < len(self._min_binary_heap) and right_child < len(self._min_binary_heap):
             if self._min_binary_heap[left_child] < self._min_binary_heap[right_child]:
                 return left_child
             else:
@@ -96,47 +96,48 @@ class MinBinaryHeap:
         print(self._min_binary_heap)
 
 
-my_min_heap = MinBinaryHeap()
+if __name__ == '__main__':
+    my_min_heap = MinBinaryHeap()
 
-my_min_heap.insert(10)
-my_min_heap.insert(4)
-my_min_heap.insert(15)
-my_min_heap.remove_min()
-my_min_heap.insert(20)
-my_min_heap.insert(0)
-my_min_heap.insert(30)
-my_min_heap.remove_min()
-my_min_heap.remove_min()
-my_min_heap.insert(2)
-my_min_heap.insert(4)
-my_min_heap.insert(-1)
-my_min_heap.insert(-3)
+    my_min_heap.insert(10)
+    my_min_heap.insert(4)
+    my_min_heap.insert(15)
+    my_min_heap.remove_min()
+    my_min_heap.insert(20)
+    my_min_heap.insert(0)
+    my_min_heap.insert(30)
+    my_min_heap.remove_min()
+    my_min_heap.remove_min()
+    my_min_heap.insert(2)
+    my_min_heap.insert(4)
+    my_min_heap.insert(-1)
+    my_min_heap.insert(-3)
 
 
-my_min_heap.print_heap()
+    my_min_heap.print_heap()
 
-#     -3
-#     / \
-#    4  -1
-#   / \  / \
-#  30 15 20 2
+    #     -3
+    #     / \
+    #    4  -1
+    #   / \  / \
+    #  30 15 20 2
 
-my_min_heap2 = MinBinaryHeap()
+    my_min_heap2 = MinBinaryHeap()
 
-items = [17, 15, 8, 9, 10, 13, 6, 4, 5, 3, 1]
+    items = [17, 15, 8, 9, 10, 13, 6, 4, 5, 3, 1]
 
-for item in items:
-    my_min_heap2.insert(item)
+    for item in items:
+        my_min_heap2.insert(item)
 
-print(my_min_heap2.remove_min())
-print(my_min_heap2.remove_min())
+    print(my_min_heap2.remove_min())
+    print(my_min_heap2.remove_min())
 
-my_min_heap2.print_heap()
+    my_min_heap2.print_heap()
 
-#         4
-#       /   \
-#      5     8
-#     / \   / \
-#    6  10 15 13
-#   / \
-#  17 9
+    #         4
+    #       /   \
+    #      5     8
+    #     / \   / \
+    #    6  10 15 13
+    #   / \
+    #  17 9

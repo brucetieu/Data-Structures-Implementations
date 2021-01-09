@@ -95,38 +95,38 @@ class MaxBinaryHeap:
     def print_heap(self):
         print(self._max_binary_heap)
 
+if __name__ == '__main__':
+    my_max_heap = MaxBinaryHeap()
 
-my_max_heap = MaxBinaryHeap()
+    items = [1,3,5,4,6,13,10,9,8,15,17]
 
-items = [1,3,5,4,6,13,10,9,8,15,17]
+    for item in items:
+        my_max_heap.insert(item)
 
-for item in items:
-    my_max_heap.insert(item)
+    print(my_max_heap.remove_max())
+    print(my_max_heap.remove_max())
 
-print(my_max_heap.remove_max())
-print(my_max_heap.remove_max())
-
-my_max_heap.print_heap()
+    my_max_heap.print_heap()
 
 
 
-my_max_heap2 = MaxBinaryHeap()
+    my_max_heap2 = MaxBinaryHeap()
 
-my_max_heap2.insert(10)
-my_max_heap2.insert(4)
-my_max_heap2.insert(15)
-print(my_max_heap2.remove_max())
-my_max_heap2.insert(20)
-my_max_heap2.insert(0)
-my_max_heap2.insert(30)
-print(my_max_heap2.remove_max())
-print(my_max_heap2.remove_max())
-my_max_heap2.insert(2)
-my_max_heap2.insert(4)
-my_max_heap2.insert(-1)
-my_max_heap2.insert(-3)
+    my_max_heap2.insert(10)
+    my_max_heap2.insert(4)
+    my_max_heap2.insert(15)
+    print(my_max_heap2.remove_max())
+    my_max_heap2.insert(20)
+    my_max_heap2.insert(0)
+    my_max_heap2.insert(30)
+    print(my_max_heap2.remove_max())
+    print(my_max_heap2.remove_max())
+    my_max_heap2.insert(2)
+    my_max_heap2.insert(4)
+    my_max_heap2.insert(-1)
+    my_max_heap2.insert(-3)
 
-my_max_heap2.print_heap()
+    my_max_heap2.print_heap()
 
 
 
