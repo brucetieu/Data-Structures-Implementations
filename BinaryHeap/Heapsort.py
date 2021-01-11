@@ -3,10 +3,10 @@ class HeapSort:
     def __init__(self, arr):
         self._max_binary_heap = arr
     
-    def _trickle_down(self, index):
+    def _trickle_down(self, index, N):
         '''Trickle down element when the maximum node is removed.'''
 
-        while (2 * index) + 1 < len(self._max_binary_heap):
+        while (2 * index) + 1 < N:
             max_child = self._locate_max_child(index)
 
             if self._max_binary_heap[index] < self._max_binary_heap[max_child]:
@@ -21,7 +21,7 @@ class HeapSort:
         left_child = (2 * index) + 1
         right_child = (2 * index) + 2
 
-        # Choose the right node of the left and right childs and get its index.
+        # Choose the max node by comparing which of the left and right nodes of parent is bigger.
         if left_child < len(self._max_binary_heap) and right_child < len(self._max_binary_heap):
             if self._max_binary_heap[left_child] < self._max_binary_heap[right_child]:
                 return right_child
@@ -35,9 +35,22 @@ class HeapSort:
     def _swap(self, i, j):
         self._max_binary_heap[i], self._max_binary_heap[j] = self._max_binary_heap[j], self._max_binary_heap[i]
 
-    def heapify(self, index):
-        for i in range(index // 2, -1, -1):
-            self._trickle_down(i)
+    def heap_sort(self, index):
+        ''' Build max heap from bottom up'''
+        N = len(self._max_binary_heap)
+        # The parent of any node is (p-1) / 2. We are starting at the end of the list and building a heap from the bottom up by repeatedly tricking down the smaller node.
+        for i in range((index - 1) // 2, -1, -1):
+            self._trickle_down(i, N)
+
+        N = len(self._max_binary_heap) - 1
+        
+        while N >= 0:
+            self._swap(0, N)
+            N -= 1
+            self._trickle_down(0, N)
+
+
+        
 
 
 
