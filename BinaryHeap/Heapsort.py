@@ -35,23 +35,20 @@ class HeapSort:
     def _swap(self, i, j):
         self._max_binary_heap[i], self._max_binary_heap[j] = self._max_binary_heap[j], self._max_binary_heap[i]
 
-    def heap_sort(self, index):
+    def heapify_heapsort(self, index):
         ''' Build max heap from bottom up'''
-        N = len(self._max_binary_heap)
-        # The parent of any node is (p-1) / 2. We are starting at the end of the list and building a heap from the bottom up by repeatedly tricking down the smaller node.
-        for i in range((index - 1) // 2, -1, -1):
-            self._trickle_down(i, N)
 
-        N = len(self._max_binary_heap) - 1
+        N = index
+
+        # The parent of any node is (p-1) / 2. We are starting at the end of the list and building a heap from the bottom up by repeatedly tricking down the smaller node (heapify).
+        for i in range((N - 1) // 2, -1, -1):
+            self._trickle_down(i, N)
         
+        # Heap sort: Swap first and last element, decrement size of heap, then restore heap order
         while N >= 0:
             self._swap(0, N)
             N -= 1
             self._trickle_down(0, N)
-
-
-        
-
 
 
     def print_heap(self):
@@ -63,8 +60,6 @@ class HeapSort:
 arr = [1,16,5,30,27,17,20,2,57,3,90]
 
 heap_sort = HeapSort(arr)
-
-
-heap_sort.heapify(len(arr) - 1)
+heap_sort.heapify_heapsort(len(arr) - 1)
 
 heap_sort.print_heap()
