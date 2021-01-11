@@ -50,12 +50,9 @@ class HeapSort:
             N -= 1
             self._trickle_down(0, N)
 
-
     def print_heap(self):
         print(self._max_binary_heap)
         
-    def heap_sort(self, arr):
-        pass
 
 arr = [1,16,5,30,27,17,20,2,57,3,90]
 
