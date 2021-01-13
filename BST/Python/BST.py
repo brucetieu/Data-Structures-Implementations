@@ -138,16 +138,45 @@ class BST:
         # k is greater than the key at the root
         else:
             # Create a temporary node to traverse through the right subtree.
+            # The floor of k is in the right subtree.
             temp = self._find_floor(root.right, value)
             if temp != None:
                 return temp
+           
+            # Otherwise, the floor is the value in the root.
             return root
             
 
-    def find_floor(self, val):
-        x = self._find_floor(self.root, val)
+    def find_floor(self, value):
+        ''' Find the largest value <= a given value. '''
+        x = self._find_floor(self.root, value)
         if x is not None:   
             return x.value
+
+    
+    def _find_ceil(self, root, value):
+        if root is None:
+            return None
+        
+        if root.value == value:
+            return root
+        
+        if value > root.value:
+            return self._find_ceil(root.right, value)
+
+        else:
+            temp = self._find_ceil(root.left, value)
+            if temp != None:
+                return temp
+
+            return root
+
+    def find_ceil(self, value):
+        ''' Find the smallest key >= a given value. '''
+        x = self._find_ceil(self.root, value)
+        if x is not None:
+            return x.value
+
 
     '''
     Helper method for deleting a node in a BST - Iterative approach.
@@ -343,7 +372,9 @@ if __name__ == '__main__':
     bst.insert(19)
     bst.insert(25)
 
-    print(bst.find_floor(20))
+    # print(bst.find_floor(20))
+    print(bst.find_ceil(24))
+
     # bst.delete_node_recursive(25)
     # bst.delete_node_recursive(19)
 
