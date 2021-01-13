@@ -121,6 +121,34 @@ class BST:
         max = self._find_max(self.root)
         return max
 
+    def _find_floor(self, root, value):
+        
+        # Base case
+        if root is None:
+            return None
+        
+        # The floor of val is itself (if found in the BST).
+        if root.value == value:
+            return root
+
+        # The floor of k is in the left subtree.
+        if value < root.value:
+            return self._find_floor(root.left, value)
+
+        # k is greater than the key at the root
+        else:
+            # Create a temporary node to traverse through the right subtree.
+            temp = self._find_floor(root.right, value)
+            if temp != None:
+                return temp
+            return root
+            
+
+    def find_floor(self, val):
+        x = self._find_floor(self.root, val)
+        if x is not None:   
+            return x.value
+
     '''
     Helper method for deleting a node in a BST - Iterative approach.
     '''
@@ -308,27 +336,28 @@ if __name__ == '__main__':
     bst.insert(5)
     bst.insert(2)
     bst.insert(15)
-    bst.insert(-4)
+    # bst.insert(-4)
     bst.insert(4)
     bst.insert(9)
     bst.insert(21)
     bst.insert(19)
     bst.insert(25)
 
-    bst.delete_node_recursive(25)
-    bst.delete_node_recursive(19)
+    print(bst.find_floor(20))
+    # bst.delete_node_recursive(25)
+    # bst.delete_node_recursive(19)
 
-    print(bst.find_node(6))
+    # print(bst.find_node(6))
 
-    bst.inorder_traversal()
-    print()
-    bst.postorder_traversal()
-    print()
-    bst.preorder_traversal()
+    # bst.inorder_traversal()
+    # print()
+    # bst.postorder_traversal()
+    # print()
+    # bst.preorder_traversal()
 
-    print("max", bst.find_max())
-    print("min", bst.find_min())
+    # print("max", bst.find_max())
+    # print("min", bst.find_min())
 
-    bst.level_order_traversal()
+    # bst.level_order_traversal()
 
 
