@@ -3,21 +3,26 @@ from queue import Queue
 class BST:
     class Node:
         '''Node class for BST'''
-        def __init__(self, value=None):
+        def __init__(self, value=None, count=0):
             self.value = value
             self.left = None
             self.right = None
+            self.count = count # Count the number of nodes at each subtree
 
     '''Initialize root and size variables. Binary Search Tree class'''
     def __init__(self):
         self.root = None
-        self.size = 0
         self.queue = Queue(maxsize=100)
 
 
     '''Get the number of nodes in the BST.'''
-    def get_size(self):
-        return self.size
+    def size(self):
+        return self._size(self.root)
+
+    def _size(self, root):
+        if root == None:
+            return 0
+        return root.count
 
 
     def _insert(self, curr_node, value):
@@ -28,7 +33,7 @@ class BST:
 
             # Create a new node if we need to insert a leaf node.
             if curr_node.left == None:
-                curr_node.left = self.Node(value)
+                curr_node.left = self.Node(value, 1) # A leaf is size 1.
             else:
                 self._insert(curr_node.left, value)
 
@@ -37,23 +42,24 @@ class BST:
 
             # Create a new node if we need to insert a leaf node.
             if curr_node.right == None:
-                curr_node.right = self.Node(value)
+                curr_node.right = self.Node(value, 1)
             else:
                 self._insert(curr_node.right, value)
 
+        # For each node, we count itself, and its left and right children, if they exist. 
+        curr_node.count = 1 + self._size(curr_node.left) + self._size(curr_node.right)
 
     def insert(self, value):
         '''Public method for inserting node into the BST'''
 
         # If root is null, create a new node.
         if self.root == None:
-            self.root = self.Node(value)
+            self.root = self.Node(value,1) 
+
         # Otherwise, insert the node
         else:
             self._insert(self.root, value)
 
-        # Increment size of BST by 1.
-        self.size += 1
 
 
     def _inorder_traversal(self, root):
@@ -340,8 +346,6 @@ class BST:
                 root.value = self._inorder_successor(root.right)
                 root.right = self._delete_node_recursive(root.right, root.value)
 
-            self.size -= 1
-
         return root
 
     def level_order_traversal(self):
@@ -350,7 +354,7 @@ class BST:
 
         while not self.queue.empty():
             node = self.queue.get()
-            print(node.value)
+            print(node.count)
             
             if node.left is not None:
                 self.queue.put(node.left)
@@ -372,23 +376,24 @@ if __name__ == '__main__':
     bst.insert(19)
     bst.insert(25)
 
-    # print(bst.find_floor(20))
+
+    print(bst.find_floor(20))
     print(bst.find_ceil(24))
 
-    # bst.delete_node_recursive(25)
-    # bst.delete_node_recursive(19)
+    bst.delete_node_recursive(25)
+    bst.delete_node_recursive(19)
 
-    # print(bst.find_node(6))
+    print(bst.find_node(6))
 
-    # bst.inorder_traversal()
-    # print()
-    # bst.postorder_traversal()
-    # print()
-    # bst.preorder_traversal()
+    bst.inorder_traversal()
+    print()
+    bst.postorder_traversal()
+    print()
+    bst.preorder_traversal()
 
-    # print("max", bst.find_max())
-    # print("min", bst.find_min())
+    print("max", bst.find_max())
+    print("min", bst.find_min())
 
-    # bst.level_order_traversal()
+    bst.level_order_traversal()
 
 
