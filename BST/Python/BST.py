@@ -24,6 +24,26 @@ class BST:
             return 0
         return root.count
 
+    def _rank(self, root, value):
+
+        if root is None:
+            return None
+        
+        # The number of values less than a node is the number of nodes in its left subtree.
+        if value == root.value:
+            return self._size(root.left)
+        elif value < root.value:
+            return self._rank(root.left, value)
+        else:
+            return 1 + self._size(root.left) + self._rank(root.right, value)
+
+        
+    def rank(self, value):
+        ''' How many values are less than the given value? '''
+        if self.find_node(value) is None:
+            return "Value is not in BST"
+        return self._rank(self.root, value)
+
 
     def _insert(self, curr_node, value):
         '''Helper method for inserting node into a BST.'''
@@ -129,7 +149,7 @@ class BST:
 
     def _find_floor(self, root, value):
         
-        # Base case
+        # Base case (will be the value of temp below)
         if root is None:
             return None
         
@@ -285,25 +305,26 @@ class BST:
 
 
     def _find_node(self, root, value):
-        '''Find a node in the BST'''
+        '''Find a node in the BST'''  
+        
+        # Base case - the value is not found.
+        if root is None:
+            return None
 
-        if root == None:
+        if value > root.value:
+            return self._find_node(root.right, value)
+        elif value < root.value:
+            return self._find_node(root.left, value)
+        
+        # The value is found.
+        else:
             return root
 
-        if value < root.value:
-            self._find_node(root.left, value)
-        elif value > root.value:
-            self._find_node(root.right, value)
-
-        else:
-            return 1
-
-        return -1
-
-
-
     def find_node(self, value):
-        return self._find_node(self.root, value)
+        x = self._find_node(self.root, value)
+        if x is None:
+            return None
+        return x.value
 
 
     def delete_node_recursive(self, value):
@@ -376,24 +397,24 @@ if __name__ == '__main__':
     bst.insert(19)
     bst.insert(25)
 
+    print(bst.rank(12))
+    # print(bst.find_floor(20))
+    # print(bst.find_ceil(24))
 
-    print(bst.find_floor(20))
-    print(bst.find_ceil(24))
+    # bst.delete_node_recursive(25)
+    # bst.delete_node_recursive(19)
 
-    bst.delete_node_recursive(25)
-    bst.delete_node_recursive(19)
+    print(bst.find_node(24))
 
-    print(bst.find_node(6))
+    # bst.inorder_traversal()
+    # print()
+    # bst.postorder_traversal()
+    # print()
+    # bst.preorder_traversal()
 
-    bst.inorder_traversal()
-    print()
-    bst.postorder_traversal()
-    print()
-    bst.preorder_traversal()
+    # print("max", bst.find_max())
+    # print("min", bst.find_min())
 
-    print("max", bst.find_max())
-    print("min", bst.find_min())
-
-    bst.level_order_traversal()
+    # bst.level_order_traversal()
 
 
