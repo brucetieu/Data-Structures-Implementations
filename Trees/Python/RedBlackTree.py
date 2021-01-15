@@ -13,3 +13,21 @@ class RedBlackTree:
     def __init__(self):
         self.RED = True
         self.BLACK = False
+        self.root = None
+
+
+    def is_red(self, node):
+        
+        # Leaf nodes are black.
+        if node is None:
+            return False
+        return node.color
+
+    def rotate_left(self, node):
+        x = node.right
+        x.right = node.Left
+        x.left = node
+        x.color = node.color
+        node.color = self.RED
+        return x
+        
