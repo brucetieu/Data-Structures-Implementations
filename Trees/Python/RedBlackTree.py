@@ -62,7 +62,7 @@ class RedBlackTree:
         if val < node.val:
             node.left = self._insert(node.left, val)
         elif val > node.val:
-            node.right = self._insert(root.right, val)
+            node.right = self._insert(node.right, val)
         else:
             node.val = val # Replace value, avoid duplicates
 
@@ -131,6 +131,64 @@ class RedBlackTree:
         
         return False
 
+    def min(self):
+        curr = self.root
+
+        while curr.left != None:
+            curr = curr.left
+
+        return curr.val
+
+    def max(self):
+        curr = self.root
+
+        while curr.right != None:
+            curr = curr.right
+
+        return curr.val
+
+    def floor(self, val):
+        x = self._floor(self.root, val)
+        if x is not None:
+            return x.val
+
+    def _floor(self, root, val):
+        if root is None:
+            return None
+
+        if val == root.val:
+            return root
+
+        if val < root.val:
+            return self._floor(root.left, val)
+        else:
+            temp = self._floor(root.right, val)
+            if temp is not None:
+                return temp
+
+            return root
+
+
+    def ceil(self, val):
+        x = self._ceil(self.root, val)
+        if x is not None:
+            return x.val
+
+    def _ceil(self, root, val):
+        if root is None:
+            return None
+
+        if val == root.val:
+            return root
+
+        if val > root.val:
+            return self._ceil(root.right, val)
+        else:
+            temp = self._ceil(root.left, val)
+            if temp is not None:
+                return temp
+            return root
+
     # TODO: add delete_min / delete_max and delete methods
 
 my_red_black_tree = RedBlackTree()
@@ -138,6 +196,15 @@ my_red_black_tree = RedBlackTree()
 my_red_black_tree.insert('S')
 my_red_black_tree.insert('E')
 my_red_black_tree.insert('A')
+my_red_black_tree.insert('R')
+my_red_black_tree.insert('C')
+my_red_black_tree.insert('H')
+my_red_black_tree.insert('X')
+my_red_black_tree.insert('M')
+my_red_black_tree.insert('P')
+my_red_black_tree.insert('L')
 
 my_red_black_tree.level_order()
+
+
 
