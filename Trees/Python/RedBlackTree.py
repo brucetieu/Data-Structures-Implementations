@@ -1,3 +1,6 @@
+from queue import Queue
+
+
 # Left Leaning Red Black Tree - 1-1 Correspondence with a 2-3 Tree.
 
 class RedBlackTree:
@@ -13,6 +16,7 @@ class RedBlackTree:
         self.RED = True
         self.BLACK = False
         self.root = None
+        self.queue = Queue(maxsize=100)
 
 
     def is_red(self, node):
@@ -53,7 +57,7 @@ class RedBlackTree:
 
         # Insert a leaf node, with the link of the parent being colored red.
         if node is None:
-            node = Node(val, self.RED)
+            node = self.Node(val, self.RED)
 
         if val < node.val:
             node.left = self._insert(node.left, val)
@@ -72,8 +76,52 @@ class RedBlackTree:
 
         return node
         
+    def inorder(self):
+        self._inorder(self.root)
+
+    def _inorder(self, root):
+        if root is not None:
+            self._inorder(root.left)
+            print(root.val)
+            self._inorder(root.right)
+
+    def preorder(self):
+        self._preorder(self.root)
+
+    def _preorder(self, root):
+        if root is not None:
+            print(root.val)
+            self._preorder(root.left)
+            self._preorder(root.right)
+
+    def postorder(self):
+        self._postorder(self.root)
+
+    def _postorder(self, root):
+        if root is not None:
+            self._postorder(root.left)
+            self._postorder(root.right)
+            print(root.val)
 
 
+    def level_order(self):
+        '''Breadth first traversal of BST.'''
+        self.queue.put(self.root)
 
-    
+        while not self.queue.empty():
+            node = self.queue.get() # dequeue
+            print(node.val)
+            
+            if node.left is not None:
+                self.queue.put(node.left)
+            if node.right is not None:
+                self.queue.put(node.right)
 
+
+my_red_black_tree = RedBlackTree()
+
+my_red_black_tree.insert('S')
+my_red_black_tree.insert('E')
+my_red_black_tree.insert('A')
+
+my_red_black_tree.level_order()
