@@ -25,9 +25,22 @@ class RedBlackTree:
 
     def rotate_left(self, node):
         x = node.right
-        x.right = node.Left
+        x.right = node.left
         x.left = node
         x.color = node.color
         node.color = self.RED
         return x
+
+    def rotate_right(self, node):
+        x = node.left
+        x.left = node.right
+        x.right = node
+        x.color = node.color
+        node.color = self.RED
+        return x
         
+    def flip_colors(self, node):
+        node.color = self.RED
+        node.left.color = self.BLACK
+        node.right.color = self.BLACK
+
