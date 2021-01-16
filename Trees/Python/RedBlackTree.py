@@ -117,6 +117,21 @@ class RedBlackTree:
             if node.right is not None:
                 self.queue.put(node.right)
 
+    def search(self, val):
+
+        curr = self.root
+        
+        while curr is not None:
+            if val > curr.val:
+                curr = curr.right
+            elif val < curr.val:
+                curr = curr.left
+            else:
+                return True
+        
+        return False
+
+    # TODO: add delete_min / delete_max and delete methods
 
 my_red_black_tree = RedBlackTree()
 
@@ -125,3 +140,4 @@ my_red_black_tree.insert('E')
 my_red_black_tree.insert('A')
 
 my_red_black_tree.level_order()
+
