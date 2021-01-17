@@ -27,7 +27,7 @@ class BST:
     def _rank(self, root, value):
 
         if root is None:
-            return None
+            return 0
         
         # The number of values less than a node is the number of nodes in its left subtree.
         if value == root.value:
@@ -40,8 +40,6 @@ class BST:
         
     def rank(self, value):
         ''' How many values are less than the given value? '''
-        if self.find_node(value) is None:
-            return "Value is not in BST"
         return self._rank(self.root, value)
 
 

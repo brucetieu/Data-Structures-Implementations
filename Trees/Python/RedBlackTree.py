@@ -202,21 +202,19 @@ class RedBlackTree:
             return root
 
     def rank(self, val):
-        if not self.search(val):
-            return None
         return self._rank(self.root, val)
 
     def _rank(self, root, val):
 
         if root is None:
-            return None
+            return 0
 
         if root.val == val:
             return self.size(root.left)
 
         elif val < root.val:
             return self._rank(root.left, val)
-        
+
         return 1 + self._rank(root.right, val) + self.size(root.left)
 
 
@@ -237,7 +235,7 @@ my_red_black_tree.insert('M')
 my_red_black_tree.insert('P')
 my_red_black_tree.insert('L')
 
-print(my_red_black_tree.rank('M'))
+print(my_red_black_tree.rank('N'))
 # my_red_black_tree.level_order()
 # my_red_black_tree.preorder()
 
