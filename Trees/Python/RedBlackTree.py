@@ -6,10 +6,11 @@ from queue import Queue
 class RedBlackTree:
 
     class Node:
-        def __init__(self, val, color):
+        def __init__(self, val, count, color):
             self.val = val
             self.left = None
             self.right = None
+            self.count = count
             self.color = color
 
     def __init__(self):
@@ -18,6 +19,11 @@ class RedBlackTree:
         self.root = None
         self.queue = Queue(maxsize=100)
 
+
+    def size(self, node):
+        if node is None:
+            return 0
+        return node.count
 
     def is_red(self, node):
         
@@ -32,6 +38,8 @@ class RedBlackTree:
         x.left = node
         x.color = node.color
         node.color = self.RED
+        x.count = node.count
+        node.count = 1 + self.size(node.left) + self.size(node.right)
         return x
 
     def rotate_right(self, node):
@@ -40,6 +48,8 @@ class RedBlackTree:
         x.right = node
         x.color = node.color
         node.color = self.RED
+        x.count = node.count
+        node.count = 1 + self.size(node.left) + self.size(node.right)
         return x
         
     def flip_colors(self, node):
@@ -57,7 +67,7 @@ class RedBlackTree:
 
         # Insert a leaf node, with the link of the parent being colored red.
         if node is None:
-            node = self.Node(val, self.RED)
+            node = self.Node(val, 1, self.RED)
 
         if val < node.val:
             node.left = self._insert(node.left, val)
@@ -73,6 +83,8 @@ class RedBlackTree:
             node = self.rotate_right(node)
         if self.is_red(node.left) and self.is_red(node.right):
             self.flip_colors(node)
+
+        node.count = 1 + self.size(node.left) + self.size(node.right)
 
         return node
         
@@ -90,7 +102,7 @@ class RedBlackTree:
 
     def _preorder(self, root):
         if root is not None:
-            print(root.val)
+            print(root.count)
             self._preorder(root.left)
             self._preorder(root.right)
 
@@ -204,7 +216,8 @@ my_red_black_tree.insert('M')
 my_red_black_tree.insert('P')
 my_red_black_tree.insert('L')
 
-my_red_black_tree.level_order()
+# my_red_black_tree.level_order()
+my_red_black_tree.preorder()
 
 
 
