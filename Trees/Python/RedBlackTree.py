@@ -102,7 +102,7 @@ class RedBlackTree:
 
     def _preorder(self, root):
         if root is not None:
-            print(root.count)
+            print(root.val)
             self._preorder(root.left)
             self._preorder(root.right)
 
@@ -201,6 +201,27 @@ class RedBlackTree:
                 return temp
             return root
 
+    def rank(self, val):
+        if not self.search(val):
+            return None
+        return self._rank(self.root, val)
+
+    def _rank(self, root, val):
+
+        if root is None:
+            return None
+
+        if root.val == val:
+            return self.size(root.left)
+
+        elif val < root.val:
+            return self._rank(root.left, val)
+        
+        return 1 + self._rank(root.right, val) + self.size(root.left)
+
+
+
+
     # TODO: add delete_min / delete_max and delete methods
 
 my_red_black_tree = RedBlackTree()
@@ -216,8 +237,9 @@ my_red_black_tree.insert('M')
 my_red_black_tree.insert('P')
 my_red_black_tree.insert('L')
 
+print(my_red_black_tree.rank('M'))
 # my_red_black_tree.level_order()
-my_red_black_tree.preorder()
+# my_red_black_tree.preorder()
 
 
 
