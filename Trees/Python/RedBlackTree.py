@@ -217,6 +217,32 @@ class RedBlackTree:
 
         return 1 + self._rank(root.right, val) + self.size(root.left)
 
+    def range_count(self, low, high):
+        ''' How many values are between low and high (inclusive)?'''
+        if self.search(high):
+            return self.rank(high) - self.rank(low) + 1
+        return self.rank(high) - self.rank(low)
+
+    
+    def range_search(self, low, high):
+        '''Find all keys between low and high'''
+        queue = Queue(100)
+
+        self._range_search(self.root, queue, low, high)
+
+        return list(queue.queue)
+
+    def _range_search(self, node, queue, low, high):
+        if node is None:
+            return None
+
+        if node.val <= high and node.val >= low:
+            queue.put(node.val)
+        if high >= node.val:
+            self._range_search(node.right, queue, low, high)
+        if low <= node.val:
+            self._range_search(node.left, queue, low, high)
+
 
 
 
@@ -235,7 +261,8 @@ my_red_black_tree.insert('M')
 my_red_black_tree.insert('P')
 my_red_black_tree.insert('L')
 
-print(my_red_black_tree.rank('N'))
+print(my_red_black_tree.range_search('A', 'J'))
+# print(my_red_black_tree.rank('N'))
 # my_red_black_tree.level_order()
 # my_red_black_tree.preorder()
 

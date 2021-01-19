@@ -380,6 +380,34 @@ class BST:
             if node.right is not None:
                 self.queue.put(node.right)
 
+    def range_count(self, low, high):
+        ''' How many values are between low and high (inclusive)?'''
+        if self.find_node(high):
+            return self.rank(high) - self.rank(low) + 1
+        return self.rank(high) - self.rank(low)
+
+
+    def range_search(self, low, high):
+        queue = Queue(100)
+        
+        self._range_search(self.root, queue, low, high)
+
+        return list(queue.queue)
+
+    def _range_search(self, node, queue, low, high):
+        '''Find all keys between low and high'''
+        # queue = Queue(100)
+        if node is None:
+            return None
+
+        if node.value >= low and node.value <= high:
+            queue.put(node.value)
+        if high >= node.value:
+            self._range_search(node.right, queue, low, high)
+        if low <= node.value:
+            self._range_search(node.left, queue, low, high)
+
+
 
 
 if __name__ == '__main__':
@@ -395,14 +423,16 @@ if __name__ == '__main__':
     bst.insert(19)
     bst.insert(25)
 
-    print(bst.rank(12))
+    # print(bst.rank(16))
     # print(bst.find_floor(20))
     # print(bst.find_ceil(24))
 
     # bst.delete_node_recursive(25)
     # bst.delete_node_recursive(19)
 
-    print(bst.find_node(24))
+    # print(bst.find_node(24))
+    print(bst.range_count(2,15))
+    print(bst.range_search(2,15))
 
     # bst.inorder_traversal()
     # print()
