@@ -4,7 +4,7 @@ class GraphProcessingClient:
     ''' Include common graph processing problems
     1. degree(Graph, v): Compute the degree of v (number of edges connected to v)
     2. maxDegree(Graph): Compute the max degree of Graph
-    3. averageDegree(Graph): Compute average degree of a Graph
+    3. averageDegree(Graph): Compute average degree of a Graph (The average number of edges per node in the graph)
     4. numberOfSelfLoops(Graph): Count the number of self loops (An edge of a graph which starts and ends at the same vertex) of a Graph
     5. print_graph: Print a string representation of the adjacency list
     '''
@@ -30,7 +30,11 @@ class GraphProcessingClient:
         return max
 
     def averageDegree(self, G):
-        pass
+
+        # Total Edges/Total Nodes=Average Degree
+        # 2 b/c each edge adjacent to 2 vertices (counted twice)
+        return 2 * G.num_edges() // G.num_vertices()
+ 
 
     def numberOfSelfLoops(self, G):
         pass
@@ -44,5 +48,6 @@ myGraph = UndirectedGraph(None, 'tinyG.txt')
 
 print(graph_client.degree(myGraph, 1))
 print(graph_client.maxDegree(myGraph))
+print(graph_client.averageDegree(myGraph))
 
 
