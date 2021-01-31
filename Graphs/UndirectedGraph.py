@@ -71,7 +71,18 @@ class UndirectedGraph:
                 temp = temp.next
             print(" \n")
 
+    # Number of vertices
+    def num_vertices(self):
+        return self.V
+
+    # Number of edges (there should be 2x as much b/c there's an edge from v->w and w->v)
+    def num_edges(self):
+        return self.E
+
 
 
 myGraph = UndirectedGraph(None, 'tinyG.txt')
 myGraph.print_graph()
+
+print(myGraph.num_edges())
+print(myGraph.num_vertices())
