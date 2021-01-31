@@ -14,6 +14,7 @@ class UndirectedGraph:
     class  AdjNode:
         '''This represents all the adjacent nodes a vertex is adjacent to in the adjacency list'''
         def __init__(self, V):
+            if V < 0: raise ValueError("Number of vertices must be a positive number")
             self.V = V  # Value of vertex
             self.next = None # Pointer to the next node adjacent to the current vertex
 

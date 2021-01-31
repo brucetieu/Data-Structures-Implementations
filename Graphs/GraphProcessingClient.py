@@ -10,6 +10,7 @@ class GraphProcessingClient:
     '''
 
     def degree(self, G, v):
+        if V < 0: raise ValueError("Number of vertices must be a positive number")
         return G.adj(v)
 
     def maxDegree(self, G):
