@@ -79,6 +79,19 @@ class UndirectedGraph:
     def num_edges(self):
         return self.E
 
+    # Number of vertices adjacent to v.
+    def adj(self, v):
+        size = 0
+
+        node = self.undirectedGraph[v]
+
+        while node is not None:
+            node = node.next
+            size += 1
+
+        return size
+
+
 
 
 myGraph = UndirectedGraph(None, 'tinyG.txt')
@@ -86,3 +99,5 @@ myGraph.print_graph()
 
 print(myGraph.num_edges())
 print(myGraph.num_vertices())
+
+print(myGraph.adj(9))
