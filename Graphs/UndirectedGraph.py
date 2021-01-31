@@ -1,6 +1,15 @@
 
 
 class UndirectedGraph:
+    '''UndirectedGraph API
+    1. UndirectedGraph(V): Create a V vertex graph with no edges
+    2. UndirectedGraph(file): Read a graph from file
+    3. num_vertices(): Number of vertices
+    4. num_edges(): Number of edges
+    5. addEdge(v, w): Add edge v-w to the graph
+    6. adj(v): Number of vertices adjacent to v
+    7. print_graph(): Print the adjacency list
+    '''
 
     class  AdjNode:
         '''This represents all the adjacent nodes a vertex is adjacent to in the adjacency list'''
