@@ -12,20 +12,29 @@ class UndirectedGraph:
         if V:
             self.V = V  # Number of vertices
             self.E = 0  # Number of edges
-            self.undirectedGraph = [None] * V
+            self.undirectedGraph = [None] * V  # Represent empty graph as empty list with V number of vertices
         
         elif file:
             
+
             f = open(file, 'r')
+
+            # Create an empty graph with the number of vertices in the first line
             self.__init__(int(f.readline()))
+
+            # Number of edges is in the second line
             self.E = int(f.readline())
 
+            # Add edge to each vertex
             for i in range(self.E):
                 v, w = map(int, f.readline().split())
                 self.addEdge(v, w)
 
 
+    # Add edge v-w (each edge appears twice)
     def addEdge(self, v, w):
+
+        # Add w to v.
         node = self.AdjNode(w)
 
         if self.undirectedGraph[v] is None:
@@ -37,6 +46,7 @@ class UndirectedGraph:
                 temp = temp.next
             temp.next = node
 
+        # Add v to w.
         node = self.AdjNode(v)
 
         if self.undirectedGraph[w] is None:
@@ -51,6 +61,7 @@ class UndirectedGraph:
 
         self.E += 1
 
+    # String representation of the adjacency lists
     def print_graph(self):
         for i in range(self.V):
             print("Vertex " + str(i) + ":", end="")
