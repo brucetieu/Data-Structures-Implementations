@@ -2,7 +2,7 @@ from UndirectedGraph import UndirectedGraph
 
 class GraphProcessingClient:
     ''' Include common graph processing problems
-    1. degree(Graph, v): Compute the degree of v
+    1. degree(Graph, v): Compute the degree of v (number of edges connected to v)
     2. maxDegree(Graph): Compute the max degree of Graph
     3. averageDegree(Graph): Compute average degree of a Graph
     4. numberOfSelfLoops(Graph): Count the number of self loops (An edge of a graph which starts and ends at the same vertex) of a Graph
@@ -10,10 +10,24 @@ class GraphProcessingClient:
     '''
 
     def degree(self, G, v):
-        pass
+        degree = 0
+
+        for i in range(G.adj(v)):
+            degree += 1
+
+        return degree
+
 
     def maxDegree(self, G):
-        pass
+        max = 0
+
+        for i in range(G.num_vertices()):
+            deg = self.degree(G, i)
+
+            if deg > max:
+                max = deg
+        
+        return max
 
     def averageDegree(self, G):
         pass
@@ -27,5 +41,8 @@ class GraphProcessingClient:
 
 graph_client = GraphProcessingClient()
 myGraph = UndirectedGraph(None, 'tinyG.txt')
-myGraph.print_graph()
+
+print(graph_client.degree(myGraph, 1))
+print(graph_client.maxDegree(myGraph))
+
 
