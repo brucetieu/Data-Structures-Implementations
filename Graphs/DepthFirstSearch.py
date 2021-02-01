@@ -35,7 +35,7 @@ class DepthFirstSearch:
         # For each vertex you visited, get the adjacent nodes
         node = G.adj(v)
 
-        # Do a dfs on that node (vertex), if it has not yet been visited
+        # Do a dfs on that adjacent node (vertex), if it has not yet been visited
         while node is not None:
             if self.marked[node.V] is False:
                 self.dfs(G, node.V)
