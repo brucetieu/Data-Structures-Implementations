@@ -17,7 +17,7 @@ class DepthFirstSearch:
         return self.marked[v]
 
     def count(self):
-        pass
+        return self.count
 
     def dfs(self, G, v):
         self.marked[v] = True
