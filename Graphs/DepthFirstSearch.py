@@ -14,7 +14,7 @@ class DepthFirstSearch:
 
 
     def marked(self, v):
-        pass
+        return self.marked[v]
 
     def count(self):
         pass
