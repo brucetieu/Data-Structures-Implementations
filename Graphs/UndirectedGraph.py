@@ -109,13 +109,3 @@ class UndirectedGraph:
             size += 1
 
         return size
-
-
-
-# myGraph = UndirectedGraph(None, 'tinyG.txt')
-# myGraph.print_graph()
-
-# print(myGraph.num_edges())
-# print(myGraph.num_vertices())
-
-# print(myGraph.num_adj(0))
