@@ -112,10 +112,10 @@ class UndirectedGraph:
 
 
 
-myGraph = UndirectedGraph(None, 'tinyG.txt')
-myGraph.print_graph()
+# myGraph = UndirectedGraph(None, 'tinyG.txt')
+# myGraph.print_graph()
 
-print(myGraph.num_edges())
-print(myGraph.num_vertices())
+# print(myGraph.num_edges())
+# print(myGraph.num_vertices())
 
-print(myGraph.num_adj(0))
+# print(myGraph.num_adj(0))
