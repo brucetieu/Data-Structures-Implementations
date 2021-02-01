@@ -47,6 +47,7 @@ class DepthFirstSearch:
 myGraph = UndirectedGraph(None, 'tinyG.txt')
 search = DepthFirstSearch(myGraph, 0)
 
+# Find the vertices in the graph that are connected to the source.
 for v in range(myGraph.num_vertices()):
     if search.visited(v):
         print(v, " ", end="")
