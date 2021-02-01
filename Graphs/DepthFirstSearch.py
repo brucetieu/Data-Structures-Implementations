@@ -20,6 +20,13 @@ class DepthFirstSearch:
         pass
 
     def dfs(self, G, v):
-        pass
+        self.marked[v] = True
+        
+        self.count += 1
+
+        for w in range(G.adj(v)):
+            if self.marked[w] is False:
+                self.dfs(G, w)
+        
 
 
