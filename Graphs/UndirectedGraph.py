@@ -89,11 +89,20 @@ class UndirectedGraph:
     def num_edges(self):
         return self.E
 
-    # Number of vertices adjacent to v.
+
+    # Return a pointer to the first node adjacent to v in the list.
     def adj(self, v):
-        size = 0
+        if (v > self.V): raise ValueError("Supplied vertex does not exist")
 
         node = self.undirectedGraph[v]
+
+        if node is not None:
+            return node
+
+    # Number of vertices adjacent to v.
+    def num_adj(self, v):
+        node = self.adj(v)
+        size = 0
 
         while node is not None:
             node = node.next
@@ -103,10 +112,10 @@ class UndirectedGraph:
 
 
 
-# myGraph = UndirectedGraph(None, 'tinyG.txt')
-# myGraph.print_graph()
+myGraph = UndirectedGraph(None, 'tinyG.txt')
+myGraph.print_graph()
 
-# print(myGraph.num_edges())
-# print(myGraph.num_vertices())
+print(myGraph.num_edges())
+print(myGraph.num_vertices())
 
-# print(myGraph.adj(9))
+print(myGraph.num_adj(0))
