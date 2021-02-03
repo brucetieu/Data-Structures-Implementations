@@ -18,12 +18,14 @@ class Paths:
     # Path from s to v; null if no such path.
     def pathTo(self, v):
 
+        # Maintain a stack which will contain the path to get from s to a specific vertex.
         stack = []
 
         while v != self.s:
             stack.append(v)
             v = self.edgeTo[v]
 
+        # Top of the stack is the source, bottom of the stack is v.
         stack.append(self.s)
 
         return stack
@@ -38,6 +40,8 @@ class Paths:
 
         while node is not None:
             if not self.marked[node.V]:
+
+                # To get to this vertex, we had to come from v. Think of s being the root of a tree, and it's branches are paths which all connect to s.
                 self.edgeTo[node.V] = v
                 self.dfs(node.V)
 
