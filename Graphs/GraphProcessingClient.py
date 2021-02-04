@@ -10,8 +10,8 @@ class GraphProcessingClient:
     '''
 
     def degree(self, G, v):
-        if V < 0: raise ValueError("Number of vertices must be a positive number")
-        return G.adj(v)
+        if v < 0: raise ValueError("Number of vertices must be a positive number")
+        return G.num_adj(v)
 
     def maxDegree(self, G):
         max = 0
@@ -33,15 +33,20 @@ class GraphProcessingClient:
         self_loops = 0
 
         for v in range(G.num_vertices()):
-            for w in range(G.adj(v)):
-                if v == w:
+            node = G.adj(v)
+
+            while node is not None:
+                if node.V == v:
                     self_loops += 1
+                
+                node = node.next
 
         return self_loops // 2
 
 
 graph_client = GraphProcessingClient()
 myGraph = UndirectedGraph(None, 'tinyG.txt')
+myGraph.print_graph()
 
 print("Degree:", graph_client.degree(myGraph, 1))
 print("Max degree:", graph_client.maxDegree(myGraph))
