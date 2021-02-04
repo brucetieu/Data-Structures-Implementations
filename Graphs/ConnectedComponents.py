@@ -7,12 +7,12 @@ class ConnectedComponents:
     def __init__(self, G):
         self.marked = [False] * G.num_vertices()
         self.id = [None] * G.num_vertices()
-        self.count = 0
+        self.num_cc = 0
 
         for v in range(G.num_vertices()):
             if not self.marked[v]:
                 self.dfs(G, v)
-                self.count += 1
+                self.num_cc += 1
     
     
     # Are v and w connected?
@@ -21,7 +21,7 @@ class ConnectedComponents:
 
     # Number of connected components
     def count(self):
-        return self.count
+        return self.num_cc
 
     # Component identifier for v (between 0 and count() - 1)
     def id(self, v):
@@ -29,12 +29,21 @@ class ConnectedComponents:
 
     def dfs(self, G, v):
         self.marked[v] = True
-        self.id[v] = self.count
+        self.id[v] = self.num_cc
 
         node = G.adj(v)
 
         while node is not None:
             if not self.marked[node.V]:
-                self.dfs(node.V)
+                self.dfs(G, node.V)
 
             node = node.next
+
+
+myGraph = UndirectedGraph(None, 'tinyG.txt')
+cc = ConnectedComponents(myGraph)
+
+for v in range(myGraph.num_vertices()):
+    print("{}: {}".format(v, cc.id[v]))
+
+print("Number of connected components:", cc.count())
