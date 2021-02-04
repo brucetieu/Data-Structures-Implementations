@@ -6,9 +6,10 @@ class ConnectedComponents:
     # Preprocessing constructor
     def __init__(self, G):
         self.marked = [False] * G.num_vertices()
-        self.id = [None] * G.num_vertices()
-        self.num_cc = 0
+        self.id = [None] * G.num_vertices()  # id[v] = id of component containing v
+        self.num_cc = 0  # number of components
 
+        # run dfs from one vertex in each component
         for v in range(G.num_vertices()):
             if not self.marked[v]:
                 self.dfs(G, v)
@@ -29,7 +30,7 @@ class ConnectedComponents:
 
     def dfs(self, G, v):
         self.marked[v] = True
-        self.id[v] = self.num_cc
+        self.id[v] = self.num_cc  # all vertices discovered in same call of dfs have same id
 
         node = G.adj(v)
 
