@@ -1,6 +1,7 @@
 from UndirectedGraph import UndirectedGraph
 
 class ConnectedComponents:
+    '''Find the connected components of a graph'''
 
     # Preprocessing constructor
     def __init__(self, G):
@@ -16,15 +17,15 @@ class ConnectedComponents:
     
     # Are v and w connected?
     def connected(self, v, w):
-        pass
+        return self.id[v] == self.id[w]
 
     # Number of connected components
     def count(self):
-        pass
+        return self.count
 
     # Component identifier for v (between 0 and count() - 1)
     def id(self, v):
-        pass
+        return self.id[v]
 
     def dfs(self, G, v):
         self.marked[v] = True
