@@ -13,7 +13,6 @@ class ConnectedComponents:
                 self.dfs(G, v)
                 self.count += 1
     
-
     
     # Are v and w connected?
     def connected(self, v, w):
@@ -28,4 +27,13 @@ class ConnectedComponents:
         pass
 
     def dfs(self, G, v):
-        pass
+        self.marked[v] = True
+        self.id[v] = self.count
+
+        node = G.adj(v)
+
+        while node is not None:
+            if not self.marked[node.V]:
+                self.dfs(node.V)
+
+            node = node.next
