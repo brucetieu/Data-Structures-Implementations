@@ -10,21 +10,21 @@ class Digraph:
         if V:
             self.V = V
             self.E = 0
-            self.digraph = [None] * self.v
+            self.digraph = [None] * self.V
 
         elif file:
             f = open(file, 'r')
             self.__init__(int(f.readline()))
             E = int(f.readline())
             for i in range(E):
-                v, w = map(int, f.readline())
+                v, w = map(int, f.readline().split())
                 self.addEdge(v, w)
                 
 
 
     # Number of vertices in the digraph
     def num_vertices(self):
-        return self.E
+        return self.V
 
     # Number of edges in the digraph
     def num_edges(self):
@@ -45,7 +45,9 @@ class Digraph:
 
     # Vertices connected to v by edges pointing FROM v
     def adj(self, v):
-        pass
+        node = self.digraph[v]
+        if node:
+            return node
 
     # Reverse of this digraph
     def reverse(self):
@@ -53,4 +55,13 @@ class Digraph:
 
     # Print adjacency list representation of graph
     def print_graph(self):
-        pass
+        for v in range(self.V):
+            node = self.digraph[v]
+            print("{}: ".format(v), end="")
+            while node:
+                print("{} ".format(node.v), end="")
+                node = node.next
+            print("\n")
+myDG = Digraph(None, "tinyDG.txt")
+
+myDG.print_graph()
