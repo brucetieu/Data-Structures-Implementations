@@ -24,15 +24,24 @@ class Digraph:
 
     # Number of vertices in the digraph
     def num_vertices(self):
-        pass
+        return self.E
 
     # Number of edges in the digraph
     def num_edges(self):
-        pass
+        return self.E
 
     # Add directed edge v->w to digraph
     def addEdge(self, v, w):
-        pass
+        node = self.AdjNode(w)
+
+        if self.digraph[v] is None:
+            self.digraph[v] = node
+        else:
+            temp = self.digraph[v]
+            while temp.next is not None:
+                temp = temp.next
+
+            temp.next = node
 
     # Vertices connected to v by edges pointing FROM v
     def adj(self, v):
