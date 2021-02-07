@@ -49,9 +49,19 @@ class Digraph:
         if node:
             return node
 
-    # Reverse of this digraph
+    # Reverse of this digraph. This method is needed to find the edges that point TO each vertex, while adj() gives just vertices connected by edges that point FROM each vertex.
     def reverse(self):
-        pass
+        R = Digraph(self.V)
+
+        for v in range(self.V):
+            node = self.adj(v)
+
+            while node:
+                self.addEdge(node.v, v)
+                node = node.next
+
+        return R
+                
 
     # Print adjacency list representation of graph
     def print_graph(self):
@@ -62,6 +72,7 @@ class Digraph:
                 print("{} ".format(node.v), end="")
                 node = node.next
             print("\n")
-myDG = Digraph(None, "tinyDG.txt")
 
+    
+myDG = Digraph(None, "tinyDG.txt")
 myDG.print_graph()
