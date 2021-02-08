@@ -10,7 +10,7 @@ class DirectedDFS:
             self.source = source
             self.dfs(G, self.source)
 
-        # Multiple source reachability
+        # Multiple source reachability: find vertices in G that are reachable from a set of sources
         elif sources is not None:
             self.sources = sources
 
@@ -24,13 +24,15 @@ class DirectedDFS:
     def dfs(self, G, s):
         self.marked[s] = True
 
-        # print(self.marked)
         node = G.adj(s)
 
         while node != None:
             if not self.marked[node.v]:
                 self.dfs(G, node.v)
             node = node.next
+
+
+# test client
 
 myDG = Digraph(None, "tinyDG.txt")
 source = DirectedDFS(myDG, 1, None)
