@@ -46,7 +46,8 @@ class Digraph:
     # Vertices connected to v by edges pointing FROM v
     def adj(self, v):
         node = self.digraph[v]
-        if node:
+        
+        if node is not None:
             return node
 
     # Reverse of this digraph. This method is needed to find the edges that point TO each vertex, while adj() gives just vertices connected by edges that point FROM each vertex.
@@ -73,6 +74,3 @@ class Digraph:
                 node = node.next
             print("\n")
 
-    
-myDG = Digraph(None, "tinyDG.txt")
-myDG.print_graph()
