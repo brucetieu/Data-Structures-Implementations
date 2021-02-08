@@ -3,22 +3,41 @@ from Digraph import Digraph
 class DirectedDFS:
 
     def __init__(self, G, source=None, sources=None):
-        
-        # Single source reachability
-        if source:
-            self.marked = [False] * G.num_vertices()
-            self.dfs(G, source)
+        self.marked = [False] * G.num_vertices()
+
+        # Single source reachability: find all vertices in G that are reachable from s
+        if source is not None:
+            self.source = source
+            self.dfs(G, self.source)
 
         # Multiple source reachability
-        elif sources:
-            self.marked = [False] * G.num_vertices()
-            
-            for s in sources:
+        elif sources is not None:
+            self.sources = sources
+
+            for s in self.sources:
                 if not self.marked[s]:
                     self.dfs(G, s)
 
-    def visited(self):
-        pass
+    def visited(self, v):
+        return self.marked[v]
 
     def dfs(self, G, s):
-        pass
+        self.marked[s] = True
+
+        # print(self.marked)
+        node = G.adj(s)
+
+        while node != None:
+            if not self.marked[node.v]:
+                self.dfs(G, node.v)
+            node = node.next
+
+myDG = Digraph(None, "tinyDG.txt")
+source = DirectedDFS(myDG, 1, None)
+sources = DirectedDFS(myDG, None, [1,2,6])
+
+# Print out the nodes that can be reached from the source
+for v in range(myDG.num_vertices()):
+    if sources.visited(v):
+        print("{} ".format(v), end="")
+print("\n")
