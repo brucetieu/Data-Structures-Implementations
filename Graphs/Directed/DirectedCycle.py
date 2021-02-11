@@ -6,7 +6,7 @@ class DirectedCycle:
     def __init__(self, G):
         self.marked = [None] * G.num_vertices()
         self.onStack = [False] * G.num_vertices()  # Vertices on the recursive call stack
-        self.isCycle = False  # Store the cycles
+        self.isCycle = False  
 
         for v in range(G.num_vertices()):
             self.dfs(G, v)
@@ -22,7 +22,7 @@ class DirectedCycle:
 
         while node:
 
-            # There is a path from w->v => a cycle exists
+            # If we ever find a directed edge v->w to a vertex w that is on that stack, we have found a cycle
             if self.onStack[node.v]: 
                 self.isCycle = True
             if not self.marked[node.v]:
